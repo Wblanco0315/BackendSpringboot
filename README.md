@@ -17,7 +17,8 @@ Este proyecto es un sistema de gestión de transacciones financieras que permite
 ### 1. 📝 **Registro de Usuario**
    - **URL:** `http://localhost:8080/auth/register`
    - **Método:** `POST`
-   - **Descripción:** Permite crear una nueva cuenta de usuario proporcionando datos como cedula y contraseña.
+   - **Descripción:** Permite crear una nueva cuenta de usuario proporcionando datos como cedula y contraseña,
+     el primer usuario en ser creado en la bd sera admin, los demas por defecto seran client.
 ```
 {
     "name":"",
@@ -33,59 +34,85 @@ Este proyecto es un sistema de gestión de transacciones financieras que permite
    - **Admin por defecto :**
 ```
 {
-    "cedula":"0123456789",
-    "password":"admin123"
+    "cedula":"",
+    "password":""
 }
 
 ```
 ### 3. 💵 **Cierre de sesion**
+   - **URL:** `http://localhost:8080/auth/logout`
+   - **Método:** `POST`
+   - **Descripción:** Cierra la sesion y caduca el token actual.
+   - **Auth Type:** Bearer Token
+
+### 4. 💵 **Consultar Saldo**
    - **URL:** `http://localhost:8080/transaccion/balance`
    - **Método:** `GET`
-   - **Descripción:** Muestra el saldo disponible en la cuenta del usuario autenticado.
+   - **Descripción:** Obtiene el saldo de usuario.
    - **Auth Type:** Bearer Token
-
-### 4. 🏧 **Retiro de Fondos**
-   - **URL:** `http://localhost:8080/transaccion/retiro`
+     
+### 5. 🏧 **Retiro de Fondos**
+   - **URL:** `http://localhost:8080/transaccion/withdrawal`
    - **Método:** `POST`
-   - **Descripción:** Permite retirar una cantidad específica de dinero de la cuenta del usuario.
+   - **Descripción:** Permite retirar una cantidad específica de dinero de la cuenta del usuario a travez de la cedula.
+   - **Auth Type:** Bearer Token
 ```
 {
-    "monto":"1000000.00",
-    "cedula":"1065863389",
-    "password":"12345678"
+    "identifier":"",
+    "amount":
 }
 ```
-### 5. 💳 **Depósito de Fondos**
-   - **URL:** `http://localhost:8080/transaccion/depositar`
+### 6. 💳 **Depósito de Fondos**
+   - **URL:** `http://localhost:8080/transaccion/deposit`
    - **Método:** `POST`
    - **Descripción:** Permite depositar una cantidad de dinero en la cuenta del usuario.
-```
-{
-    "monto":"100000",
-    "cedula":"1065863389"
-}
-```
-### 6. 🔄 **Transferencia entre Usuarios**
-   - **URL:** `http://localhost:8080/transaccion/transferencia`
-   - **Método:** `POST`
-   - **Descripción:** Realiza una transferencia de fondos desde la cuenta del usuario autenticado hacia la cuenta de otro usuario digitado.
    - **Auth Type:** Bearer Token
 ```
 {
-    "monto":3000.00,
-    "cedula":"0123456789"
+    "identifier":"",
+    "amount":
 }
 ```
-### 7. 📋 **Auditoría de Transacciones (Todos los Usuarios)**
-   - **URL:** `http://localhost:8080/transaccion/auditoria`
+### 7. 🔄 **Transferencia entre Usuarios**
+   - **URL:** `http://localhost:8080/transaccion/transfer`
+   - **Método:** `POST`
+   - **Descripción:** Realiza una transferencia de fondos desde la cuenta del usuario autenticado hacia la cuenta de otro usuario digitado con la cedula.
+   - **Auth Type:** Bearer Token
+```
+{
+    "identifierOrigen":"",
+    "identifierDestino":"",
+    "amount":
+}
+```
+### 8. 📋 **Lista de Depositos del usuario**
+   - **URL:** `http://localhost:8080/tables/deposits`
    - **Método:** `GET`
-   - **Descripción:** Muestra la tabla completa de todas las transacciones realizadas por todos los usuarios del sistema (requiere permisos de administrador).
+   - **Descripción:** Muestra una lista de depositos hechos por el usuario.
+   - **Auth Type:** Bearer Token
+     
+### 9. 💰 **Lista de Retiros del Usuario**
+   - **URL:** `http://localhost:8080/tables/withdrawals`
+   - **Método:** `GET`
+   - **Descripción:** Muestra una lista de retiros hechos por el usuario.
    - **Auth Type:** Bearer Token
 
-### 8. 📜 **Historial de Transacciones del Usuario**
-   - **URL:** `http://localhost:8080/transaccion/historial`
+### 10. 🧾 **Historial de Todas las Transacciones del Usuario**
+   - **URL:** `http://localhost:8080/tables/transactions`
    - **Método:** `GET`
    - **Descripción:** Muestra el historial de transacciones realizadas por el usuario autenticado.
+   - **Auth Type:** Bearer Token
+
+### 11. 👥 **Lista de Usuarios Registrados en el Sistema**
+   - **URL:** `http://localhost:8080/admin/users`
+   - **Método:** `GET`
+   - **Descripción:** Muestra la lista de usuarios registrados en el sistema. Requiere rol admin.
+   - **Auth Type:** Bearer Token
+
+### 12. 🕵️‍♂️ **Lista de Auditorías**
+   - **URL:** `http://localhost:8080/admin/audits`
+   - **Método:** `GET`
+   - **Descripción:** Muestra todas las transacciones realizadas en todos sus estados. Requiere rol admin.
    - **Auth Type:** Bearer Token
 ---
 
