@@ -65,7 +65,7 @@ Este proyecto es un sistema de gestión de transacciones financieras que permite
 ### 6. 💳 **Depósito de Fondos**
    - **URL:** `http://localhost:8080/transaccion/deposit`
    - **Método:** `POST`
-   - **Descripción:** Permite depositar una cantidad de dinero en la cuenta del usuario.
+   - **Descripción:** Permite depositar una cantidad de dinero en la cuenta del usuario a travez de la cedula.
    - **Auth Type:** Bearer Token
 ```
 {
@@ -76,7 +76,8 @@ Este proyecto es un sistema de gestión de transacciones financieras que permite
 ### 7. 🔄 **Transferencia entre Usuarios**
    - **URL:** `http://localhost:8080/transaccion/transfer`
    - **Método:** `POST`
-   - **Descripción:** Realiza una transferencia de fondos desde la cuenta del usuario autenticado hacia la cuenta de otro usuario digitado con la cedula.
+   - **Descripción:** Realiza una transferencia de fondos desde la cuenta del usuario autenticado hacia la cuenta de otro usuario digitado con la cedula, en identifier se puede
+     usar la cedula o numero de cuenta.
    - **Auth Type:** Bearer Token
 ```
 {
